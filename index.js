@@ -179,7 +179,7 @@ function appendNextWord() {
     const wordBox = $(`<div class="word" id="word-${count}">`)
     frame.append(wordBox)
 
-    const prev = $(`<div class="arrows disabled" id="prev-${count}">⮜</div>`)
+    const prev = $(`<div class="arrows disabled" id="prev-${count}">&larr;</div>`)
     prev.on('click', prevGuess)
     wordBox.append(prev)
 
@@ -189,7 +189,7 @@ function appendNextWord() {
         wordBox.append(letter)
     }
 
-    const next = $(`<div class="arrows disabled" id="next-${count}">⮞</div>`)
+    const next = $(`<div class="arrows disabled" id="next-${count}">&rarr;</div>`)
     next.on('click', nextGuess)
     wordBox.append(next)
 
