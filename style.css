@@ -1,5 +1,6 @@
 body {
     background-color: #222;
+    user-select: none;
 }
 
 .app {
@@ -42,6 +43,7 @@ body {
     height: 24px;
     line-height: 24px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .arrows {
@@ -53,6 +55,7 @@ body {
     letter-spacing: 0;
     height: 24px;
     line-height: 24px;
+    cursor: pointer;
 }
 
 .disabled {
@@ -95,4 +98,5 @@ button {
     border: 1px dashed #777;
     color: #eee;
     padding: 4px;
+    cursor: pointer;
 }
