@@ -43,10 +43,16 @@ function findBestGuesses(words) {
             }
 
             const scores = calculateScore(word, guess)
-            let guessScore = 1
+            let guessScore = 0
 
             for (const value of scores) {
-                guessScore *= value
+                switch (value) {
+                    case VALID_LETTER:
+                        guessScore++
+                        break
+                    case EXACT_LETTER:
+                        guessScore += 6
+                }
             }
 
             score += guessScore
