@@ -40,7 +40,7 @@ function receivedGuesses() {
         $('#content').append($(`<div id="reset"><button onclick="reset()">Reset</button></div>`))
     }
 
-    if (guesses.length > 1) {
+    if (guesses.length > 0) {
         updateNextGuess()
     } else {
         $(`#word-${count}`).remove()
