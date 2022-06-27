@@ -50,7 +50,7 @@ function calculateGuessScore(scores, lettersLeft) {
     for (const value of scores) {
         switch (value) {
             case EXACT_LETTER:
-                guessScore += 0.2 // 20% solved
+                guessScore++
                 break
             default:
                 nonExactCount++
