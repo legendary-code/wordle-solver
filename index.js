@@ -105,16 +105,6 @@ function updateNextGuess() {
     }
 }
 
-function countLetter(word, letter) {
-    let count = 0
-    for (let c of word) {
-        if (c === letter) {
-            count++
-        }
-    }
-    return count
-}
-
 function filterWords() {
     let guess = ''
     const guessScore = []

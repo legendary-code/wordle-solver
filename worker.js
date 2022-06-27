@@ -31,8 +31,51 @@ function calculateScore(word, guess) {
     return result
 }
 
+function remainingLetters(words) {
+    const letters = {}
+    for (const word of words) {
+        for (const letter of word) {
+            letters[letter] = true
+        }
+    }
+    return Object.keys(letters).length
+}
+
+function calculateGuessScore(scores, lettersLeft) {
+    let guessScore = 0
+    let nonExactCount = 0
+    const invalidLetterScore = 1 / lettersLeft
+    
+    // Exact guesses first
+    for (const value of scores) {
+        switch (value) {
+            case EXACT_LETTER:
+                guessScore += 0.2 // 20% solved
+                break
+            default:
+                nonExactCount++
+                break
+        }
+    }
+
+    // The rest
+    for (const value of scores) {
+        switch (value) {
+            case VALID_LETTER:
+                guessScore += (1 / nonExactCount) // % solved varies by number of letter slots available
+                break
+            case INVALID_LETTER:
+                guessScore += invalidLetterScore // % solved varies by number of letters remaining to guess
+                break
+        }
+    }
+
+    return guessScore
+}
+
 function findBestGuesses(words) {
     const guesses = []
+    const lettersLeft = remainingLetters(words)
 
     for (const word of words) {
         let score = 0
@@ -43,19 +86,7 @@ function findBestGuesses(words) {
             }
 
             const scores = calculateScore(word, guess)
-            let guessScore = 0
-
-            for (const value of scores) {
-                switch (value) {
-                    case VALID_LETTER:
-                        guessScore++
-                        break
-                    case EXACT_LETTER:
-                        guessScore += 6
-                }
-            }
-
-            score += guessScore
+            score += calculateGuessScore(scores, lettersLeft)
         }
 
         guesses.push({word, score})
