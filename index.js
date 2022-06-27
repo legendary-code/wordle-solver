@@ -9,7 +9,9 @@ function showError(message) {
 
 function start() {
     const wordsLeft = words.length
-    const wordsLeftText = wordsLeft.toLocaleString() + ' word' + (wordsLeft === 1 ? '' : 's') + ' left'
+    const lettersLeft = remainingLetters(words)
+    const wordsLeftText = wordsLeft.toLocaleString() + ' word' + (wordsLeft === 1 ? '' : 's') + ' left' +
+        `, ${lettersLeft} letter${lettersLeft === 1 ? '' : 's'} left`
     $('#content').append($(`<div id="word-count">${wordsLeftText}</div>`))
 
     appendNextWord()
@@ -146,7 +148,9 @@ function submitGuess() {
     filterWords()
 
     const wordsLeft = words.length
-    const wordsLeftText = wordsLeft.toLocaleString() + ' word' + (wordsLeft === 1 ? '' : 's') + ' left'
+    const lettersLeft = remainingLetters(words)
+    const wordsLeftText = wordsLeft.toLocaleString() + ' word' + (wordsLeft === 1 ? '' : 's') + ' left' +
+        `, ${lettersLeft} letter${lettersLeft === 1 ? '' : 's'} left`
     $('#word-count').text(wordsLeftText)
 }
 
@@ -174,7 +178,7 @@ function appendNextWord() {
     wordBox.append(prev)
 
     for (let i = 0; i < 5; ++i) {
-        const letter = $(`<div class="letter pending" style="animation-delay: ${i/5}s" id="letter-${count}-${i}">?</div>`)
+        const letter = $(`<div class="letter pending" style="animation-delay: ${i / 5}s" id="letter-${count}-${i}">?</div>`)
         letter.on('click', () => toggleGuessLetter(letter))
         wordBox.append(letter)
     }
